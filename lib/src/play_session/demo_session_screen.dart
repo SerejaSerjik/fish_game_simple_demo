@@ -62,6 +62,7 @@ class _DemoSessionScreenState extends State<DemoSessionScreen> {
           backgroundColor: palette.backgroundPlaySession,
           body: Stack(
             children: [
+              GameWidget(game: MyGame()),
               Center(
                 // This is the entirety of the "game".
                 child: Column(
@@ -76,10 +77,6 @@ class _DemoSessionScreenState extends State<DemoSessionScreen> {
                           semanticLabel: 'Settings',
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      height: 600,
-                      child: GameWidget(game: MyGame()),
                     ),
                     const Spacer(),
                     Padding(
