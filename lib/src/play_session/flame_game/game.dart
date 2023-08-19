@@ -14,15 +14,23 @@ class MyGame extends FlameGame with DragCallbacks {
 
   final FishComponent _fishComponent = FishComponent();
 
+  SpriteAnimationComponent fishAnimation = SpriteAnimationComponent();
+
   @override
   Future<void> onLoad() async {
-    // await images.loadAll([
-    //     'simpleSpace_tilesheet@2.png',
-    //     'freeze.png',
-    //     'icon_plusSmall.png',
-    //     'multi_fire.png',
-    //     'nuke.png',
-    //   ]);
+    var spriteSheet = await images.load('fish-spritesheet.png');
+    final spriteSize = Vector2(236, 182);
+    SpriteAnimationData spriteData = SpriteAnimationData.sequenced(
+      amount: 13,
+      stepTime: 0.2,
+      textureSize: Vector2(236, 182),
+    );
+    fishAnimation =
+        SpriteAnimationComponent.fromFrameData(spriteSheet, spriteData)
+          ..x = 25
+          ..y = 35
+          ..size = spriteSize;
+    add(fishAnimation);
 
     ParallaxComponent waterBg = await ParallaxComponent.load(
       [
