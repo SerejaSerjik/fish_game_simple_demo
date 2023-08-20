@@ -9,29 +9,17 @@ import 'package:flutter/material.dart';
 import 'package:game_template/src/components/fish.dart';
 import 'package:game_template/src/components/joystick.dart';
 
+import '../../components/fish_animation.dart';
+
 class MyGame extends FlameGame with DragCallbacks {
   late final GameJoystick joystick;
 
-  final FishComponent _fishComponent = FishComponent();
+  // final FishComponent _fishComponent = FishComponent();
 
-  SpriteAnimationComponent fishAnimation = SpriteAnimationComponent();
+  final FishAnimationComponent _fishAnimation = FishAnimationComponent();
 
   @override
   Future<void> onLoad() async {
-    var spriteSheet = await images.load('fish-spritesheet.png');
-    final spriteSize = Vector2(236, 182);
-    SpriteAnimationData spriteData = SpriteAnimationData.sequenced(
-      amount: 13,
-      stepTime: 0.2,
-      textureSize: Vector2(236, 182),
-    );
-    fishAnimation =
-        SpriteAnimationComponent.fromFrameData(spriteSheet, spriteData)
-          ..x = 25
-          ..y = 35
-          ..size = spriteSize;
-    add(fishAnimation);
-
     ParallaxComponent waterBg = await ParallaxComponent.load(
       [
         ParallaxImageData('1.png'),
@@ -54,10 +42,12 @@ class MyGame extends FlameGame with DragCallbacks {
 
     add(background);
 
-    add(_fishComponent);
+    // add(_fishComponent);
 
     joystick = GameJoystick();
     add(joystick);
+
+    add(_fishAnimation);
 
     await super.onLoad();
 
